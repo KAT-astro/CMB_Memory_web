@@ -6,6 +6,23 @@ const hardBtn = document.getElementById('hard-btn');
 const easyRankingList = document.getElementById('easy-ranking');
 const hardRankingList = document.getElementById('hard-ranking');
 
+const ALL_IMAGE_NAMES = [
+    'Q-30GHz_hard.png',
+    'Q-44GHz_hard.jpg',
+    'Q-70GHz_hard.png',
+    'Q-100GHz_hard.svg',
+    'Q-143GHz_hard.png',
+    'Q-217GHz_hard.jpg',
+    'Q-353GHz_hard.png',
+    'U-30GHz_hard.png',
+    'U-44GHz_hard.jpg',
+    'U-70GHz_hard.png',
+    'U-100GHz_hard.svg',
+    'U-143GHz_hard.png',
+    'U-217GHz_hard.jpg',
+    'U-353GHz_hard.png',
+];
+
 // ゲームの状態を管理する変数
 let cardPairs;
 let cards = [];
@@ -22,11 +39,6 @@ let seconds = 0;
 // 画像のパス
 const imagePath = 'images/';
 
-// カードのサイズ (CSSと合わせる)
-const CARD_WIDTH = 100;
-const CARD_HEIGHT = 140;
-const ROTATION_RANGE = 15; 
-
 // イベントリスナーを設定
 easyBtn.addEventListener('click', () => startGame('easy'));
 hardBtn.addEventListener('click', () => startGame('hard'));
@@ -37,7 +49,17 @@ document.addEventListener('DOMContentLoaded', displayRankings);
  */
 function startGame(mode) {
     currentMode = mode;
-    cardPairs = (mode === 'easy') ? 12 : 13;
+    cardPairs = (mode === 'easy') ? 12 : 14; // 難しいモードは14組
+    
+    // 画像リストの枚数が足りているかチェック
+    if (ALL_IMAGE_NAMES.length < cardPairs) {
+        alert(`エラー: 画像の数が足りません。${cardPairs}種類以上の画像をリストに登録してください。`);
+        return;
+    }
+
+    gameBoard.className = '';
+    gameBoard.classList.add(mode === 'easy' ? 'easy-grid' : 'hard-grid');
+
     resetGame();
     createBoard();
     startTimer();
@@ -62,36 +84,19 @@ function resetGame() {
  * カードをシャッフルしてボードを作成する関数
  */
 function createBoard() {
-    let gameImages = [];
-    for (let i = 1; i <= cardPairs; i++) {
-        gameImages.push(`${i}.jpg`);
-        gameImages.push(`${i}.jpg`);
-    }
-    shuffleArray(gameImages); 
+    // 1. マスターリストから、このゲームで使う画像のリストを作成
+    const imagesForThisGame = ALL_IMAGE_NAMES.slice(0, cardPairs);
 
-    const numCards = gameImages.length;
-    const boardWidth = gameBoard.clientWidth;
-    const boardHeight = gameBoard.clientHeight;
+    // 2. ペアになるように、リストを2倍にする
+    let gameImages = [...imagesForThisGame, ...imagesForThisGame];
+    
+    shuffleArray(gameImages); // 最終的なカードリストをシャッフル
 
-    const gridCols = (currentMode === 'easy') ? 6 : 7;
-    const gridRows = Math.ceil(numCards / gridCols);
-
-    const cellWidth = boardWidth / gridCols;
-    const cellHeight = boardHeight / gridRows;
-
-    let cellPositions = [];
-    for (let i = 0; i < numCards; i++) {
-        cellPositions.push({
-            row: Math.floor(i / gridCols),
-            col: i % gridCols,
-        });
-    }
-    shuffleArray(cellPositions);
-
-    gameImages.forEach((imageName, index) => {
+    // 3. カードを生成してゲームボードに追加
+    gameImages.forEach(imageName => {
         const card = document.createElement('div');
         card.classList.add('card');
-        card.dataset.name = imageName;
+        card.dataset.name = imageName; // データ属性にはファイル名をそのまま使用
 
         card.innerHTML = `
             <div class="card-inner">
@@ -101,9 +106,6 @@ function createBoard() {
                 <div class="card-back"></div>
             </div>
         `;
-
-        const pos = cellPositions[index];
-        setCardPositionInCell(card, pos, cellWidth, cellHeight);
         
         card.addEventListener('click', flipCard);
         gameBoard.appendChild(card);
@@ -111,6 +113,9 @@ function createBoard() {
     });
 }
 
+/**
+ * 配列をシャッフルするヘルパー関数
+ */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -118,28 +123,14 @@ function shuffleArray(array) {
     }
 }
 
-function setCardPositionInCell(card, pos, cellWidth, cellHeight) {
-    const cellX = pos.col * cellWidth;
-    const cellY = pos.row * cellHeight;
-
-    const maxOffsetX = Math.max(0, cellWidth - CARD_WIDTH - 10);
-    const maxOffsetY = Math.max(0, cellHeight - CARD_HEIGHT - 10);
-
-    const randomOffsetX = Math.random() * maxOffsetX;
-    const randomOffsetY = Math.random() * maxOffsetY;
-    const randomRotation = (Math.random() * (ROTATION_RANGE * 2)) - ROTATION_RANGE;
-
-    card.style.left = `${cellX + randomOffsetX}px`;
-    card.style.top = `${cellY + randomOffsetY}px`;
-    card.style.transform = `rotateZ(${randomRotation}deg)`;
-}
+// これ以降の関数 (flipCard, checkForMatch など) は変更ありません
+// ... (以下、変更なし) ...
 
 function flipCard() {
-    if (lockBoard || this.classList.contains('flipped')) return;
+    if (lockBoard || this.classList.contains('flipped') || this.classList.contains('matched')) return;
     if (this === firstCard) return;
 
     this.classList.add('flipped');
-    this.style.zIndex = 10;
 
     if (!firstCard) {
         firstCard = this;
@@ -162,9 +153,6 @@ function disableCards() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
 
-    firstCard.style.zIndex = 1;
-    secondCard.style.zIndex = 1;
-
     matchedPairs++;
     resetTurn();
     
@@ -177,8 +165,6 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove('flipped');
         secondCard.classList.remove('flipped');
-        firstCard.style.zIndex = 1;
-        secondCard.style.zIndex = 1;
         resetTurn();
     }, 1200);
 }
