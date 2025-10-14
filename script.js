@@ -6,21 +6,38 @@ const hardBtn = document.getElementById('hard-btn');
 const easyRankingList = document.getElementById('easy-ranking');
 const hardRankingList = document.getElementById('hard-ranking');
 
-const ALL_IMAGE_NAMES = [
-    'Q-30GHz_hard.png',
-    'Q-44GHz_hard.jpg',
-    'Q-70GHz_hard.png',
-    'Q-100GHz_hard.svg',
-    'Q-143GHz_hard.png',
-    'Q-217GHz_hard.jpg',
-    'Q-353GHz_hard.png',
-    'U-30GHz_hard.png',
-    'U-44GHz_hard.jpg',
-    'U-70GHz_hard.png',
-    'U-100GHz_hard.svg',
-    'U-143GHz_hard.png',
-    'U-217GHz_hard.jpg',
-    'U-353GHz_hard.png',
+// 【かんたんモード用の画像リスト (12個)】
+const EASY_IMAGE_NAMES = [
+    'easy_cat.png',
+    'easy_dog.png',
+    'easy_bird.png',
+    'easy_fish.png',
+    'easy_rabbit.png',
+    'easy_hamster.png',
+    'easy_apple.png',
+    'easy_orange.png',
+    'easy_grape.png',
+    'easy_lemon.png',
+    'easy_car.png',
+    'easy_bus.png'
+];
+
+// 【むずかしいモード用の画像リスト (14個)】
+const HARD_IMAGE_NAMES = [
+    'hard_spade.png',
+    'hard_heart.png',
+    'hard_diamond.png',
+    'hard_clover.png',
+    'hard_king.png',
+    'hard_queen.png',
+    'hard_jack.png',
+    'hard_joker.png',
+    'hard_sun.png',
+    'hard_moon.png',
+    'hard_star.png',
+    'hard_cloud.png',
+    'hard_tree.png',
+    'hard_flower.png'
 ];
 
 // ゲームの状態を管理する変数
@@ -49,16 +66,18 @@ document.addEventListener('DOMContentLoaded', displayRankings);
  */
 function startGame(mode) {
     currentMode = mode;
-    cardPairs = (mode === 'easy') ? 12 : 14; // 難しいモードは14組
+    const isEasy = (mode === 'easy');
+    cardPairs = isEasy ? 12 : 14;
     
     // 画像リストの枚数が足りているかチェック
-    if (ALL_IMAGE_NAMES.length < cardPairs) {
-        alert(`エラー: 画像の数が足りません。${cardPairs}種類以上の画像をリストに登録してください。`);
+    const requiredImages = isEasy ? EASY_IMAGE_NAMES.length : HARD_IMAGE_NAMES.length;
+    if (requiredImages < cardPairs) {
+        alert(`エラー: 画像の数が足りません。${mode}モードには${cardPairs}種類の画像が必要です。`);
         return;
     }
 
     gameBoard.className = '';
-    gameBoard.classList.add(mode === 'easy' ? 'easy-grid' : 'hard-grid');
+    gameBoard.classList.add(isEasy ? 'easy-grid' : 'hard-grid');
 
     resetGame();
     createBoard();
@@ -84,8 +103,8 @@ function resetGame() {
  * カードをシャッフルしてボードを作成する関数
  */
 function createBoard() {
-    // 1. マスターリストから、このゲームで使う画像のリストを作成
-    const imagesForThisGame = ALL_IMAGE_NAMES.slice(0, cardPairs);
+    // 1. モードに応じて使用する画像リストを選択
+    const imagesForThisGame = (currentMode === 'easy') ? EASY_IMAGE_NAMES : HARD_IMAGE_NAMES;
 
     // 2. ペアになるように、リストを2倍にする
     let gameImages = [...imagesForThisGame, ...imagesForThisGame];
@@ -96,7 +115,7 @@ function createBoard() {
     gameImages.forEach(imageName => {
         const card = document.createElement('div');
         card.classList.add('card');
-        card.dataset.name = imageName; // データ属性にはファイル名をそのまま使用
+        card.dataset.name = imageName;
 
         card.innerHTML = `
             <div class="card-inner">
