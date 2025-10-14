@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神経衰弱</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>神経衰弱</h1>
 
+    <div class="panel">
+        <div class="controls">
+            <button id="easy-btn">簡単 (12組)</button>
+            <button id="hard-btn">難しい (13組)</button>
+        </div>
+        <div id="timer">時間: 00:00</div>
+    </div>
+
+    <div id="game-board">
+        <p>難易度を選択してゲームを開始してください。</p>
+    </div>
+
+    <div id="ranking">
+        <h2>🏆 ランキング</h2>
+        <div class="ranking-container">
+            <div>
+                <h3>簡単モード</h3>
+                <ol id="easy-ranking"></ol>
+            </div>
+            <div>
+                <h3>難しいモード</h3>
+                <ol id="hard-ranking"></ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
