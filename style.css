@@ -79,7 +79,7 @@ button:hover {
 /* カードのスタイルを大きく変更 */
 .card {
     width: 168px;
-    height: 118px;
+    height: 116px;
     perspective: 1000px;
     cursor: pointer;
 }
