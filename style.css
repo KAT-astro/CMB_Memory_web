@@ -18,7 +18,7 @@ h1, h2 {
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    max-width: 700px;
+    max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
     margin-bottom: 20px;
     background: #fff;
     padding: 10px 20px;
@@ -54,7 +54,7 @@ button:hover {
     gap: 10px;
     justify-content: center;
     width: 100%;
-    max-width: 700px;
+    max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
     padding: 10px;
     box-sizing: border-box;
 }
@@ -66,20 +66,20 @@ button:hover {
     font-size: 18px;
 }
 
-/* ★簡単モード (横4枚 x 縦6行) 用のグリッド設定 */
+/* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
 .easy-grid {
     grid-template-columns: repeat(6, 1fr);
 }
 
-/* ★難しいモード (横4枚 x 縦7行) 用のグリッド設定 */
+/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
 .hard-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
-/* ★カードのスタイルを横向きに変更 */
+/* カードのスタイルを大きく変更 */
 .card {
-    width: 168px;  /* 横長に変更 */
-    height: 120px; /* 横長に変更 */
+    width: 168px;
+    height: 120px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -126,7 +126,7 @@ button:hover {
 }
 
 .card-back {
-    background-image: url('images_back/LiteBIRD_trump_back.png');
+    background-image: url('images_back/CMB_trump_back.png');
     background-size: cover;
     background-position: center;
 }
