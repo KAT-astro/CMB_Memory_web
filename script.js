@@ -25,18 +25,18 @@ const EASY_IMAGE_NAMES = [
 // 【むずかしいモード用の画像リスト (14個)】
 const HARD_IMAGE_NAMES = [
     'Q-30GHz_hard.png',
-    'Q-44GHz_hard.jpg',
+    'Q-44GHz_hard.png',
     'Q-70GHz_hard.png',
-    'Q-100GHz_hard.svg',
+    'Q-100GHz_hard.png',
     'Q-143GHz_hard.png',
-    'Q-217GHz_hard.jpg',
+    'Q-217GHz_hard.png',
     'Q-353GHz_hard.png',
     'U-30GHz_hard.png',
-    'U-44GHz_hard.jpg',
+    'U-44GHz_hard.png',
     'U-70GHz_hard.png',
-    'U-100GHz_hard.svg',
+    'U-100GHz_hard.png',
     'U-143GHz_hard.png',
-    'U-217GHz_hard.jpg',
+    'U-217GHz_hard.png',
     'U-353GHz_hard.png',
 ];
 
