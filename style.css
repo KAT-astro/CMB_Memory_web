@@ -78,8 +78,8 @@ button:hover {
 
 /* ★カードのスタイルを横向きに変更 */
 .card {
-    width: 140px;  /* 横長に変更 */
-    height: 100px; /* 横長に変更 */
+    width: 168px;  /* 横長に変更 */
+    height: 120px; /* 横長に変更 */
     perspective: 1000px;
     cursor: pointer;
 }
