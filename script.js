@@ -8,7 +8,7 @@ const hardRankingList = document.getElementById('hard-ranking');
 
 // ゲームの状態を管理する変数
 let cardPairs;
-let cards = [];
+let cards = []; // すべてのカード要素を保持する配列
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false; // ボードをロックしてカードをめくれないようにする
@@ -28,6 +28,11 @@ easyBtn.addEventListener('click', () => startGame('easy'));
 hardBtn.addEventListener('click', () => startGame('hard'));
 document.addEventListener('DOMContentLoaded', displayRankings);
 
+// カードのサイズ (CSSと合わせる)
+const CARD_WIDTH = 100;
+const CARD_HEIGHT = 140;
+const ROTATION_RANGE = 20; // カードの回転角度の最大値 (±20度)
+
 /**
  * ゲームを開始する関数
  * @param {string} mode - 'easy' または 'hard'
@@ -36,20 +41,8 @@ function startGame(mode) {
     currentMode = mode;
     cardPairs = (mode === 'easy') ? 12 : 13;
     
-    // ゲームボードのクラスをリセット
-    gameBoard.className = ''; // 既存のグリッドクラスを削除
-    gameBoard.classList.add(mode === 'easy' ? 'easy-grid' : 'hard-grid');
-    if (mode === 'hard') {
-        gameBoard.style.gridTemplateColumns = 'repeat(13, 1fr)'; // 難しいモードは横長に
-    } else {
-        // 簡単モードは6x4のグリッドになるように調整
-        const cardWidth = 100; // .cardのwidth
-        const gap = 10; // gap
-        const boardWidth = 6 * cardWidth + 5 * gap;
-        gameBoard.style.maxWidth = `${boardWidth}px`;
-        gameBoard.style.gridTemplateColumns = 'repeat(6, 1fr)';
-    }
-
+    // ゲームボードのグリッドクラスは不要になるため削除
+    gameBoard.className = ''; 
 
     resetGame();
     createBoard();
@@ -68,6 +61,7 @@ function resetGame() {
     lockBoard = false;
     firstCard = null;
     secondCard = null;
+    cards = []; // カード配列もリセット
 }
 
 /**
@@ -87,6 +81,10 @@ function createBoard() {
         [gameImages[i], gameImages[j]] = [gameImages[j], gameImages[i]];
     }
     
+    // カードの配置エリアのサイズを取得
+    const boardWidth = gameBoard.clientWidth;
+    const boardHeight = gameBoard.clientHeight;
+
     // カードをHTMLに生成
     gameImages.forEach(imageName => {
         const card = document.createElement('div');
@@ -103,8 +101,30 @@ function createBoard() {
         `;
         card.addEventListener('click', flipCard);
         gameBoard.appendChild(card);
+        cards.push(card); // 生成したカードを配列に保持
+
+        // ランダムな位置と回転を設定
+        setRandomCardPosition(card, boardWidth, boardHeight);
     });
 }
+
+/**
+ * カードにランダムな位置と回転を設定する関数
+ * @param {HTMLElement} card - カード要素
+ * @param {number} boardWidth - ゲームボードの幅
+ * @param {number} boardHeight - ゲームボードの高さ
+ */
+function setRandomCardPosition(card, boardWidth, boardHeight) {
+    // カードがボードからはみ出さないように計算
+    const randomLeft = Math.random() * (boardWidth - CARD_WIDTH);
+    const randomTop = Math.random() * (boardHeight - CARD_HEIGHT);
+    const randomRotation = (Math.random() * (ROTATION_RANGE * 2)) - ROTATION_RANGE; // -ROTATION_RANGE から +ROTATION_RANGE の範囲
+
+    card.style.left = `${randomLeft}px`;
+    card.style.top = `${randomTop}px`;
+    card.style.transform = `rotateZ(${randomRotation}deg)`;
+}
+
 
 /**
  * カードをクリックしたときの処理
@@ -114,6 +134,9 @@ function flipCard() {
     if (this === firstCard) return; // 同じカードの連続クリックを防止
 
     this.classList.add('flipped');
+
+    // めくったカードを一番手前に持ってくる
+    this.style.zIndex = 10;
 
     if (!firstCard) {
         firstCard = this;
@@ -142,6 +165,11 @@ function disableCards() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
 
+    // マッチしたカードのz-indexを初期値に戻す（手前に表示し続ける必要がないため）
+    // マッチしたカードは半透明になるため、他のカードに埋もれても問題ない
+    firstCard.style.zIndex = 1; 
+    secondCard.style.zIndex = 1;
+
     matchedPairs++;
     resetTurn();
     
@@ -158,6 +186,9 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove('flipped');
         secondCard.classList.remove('flipped');
+        // カードを裏返すときにz-indexも初期値に戻す
+        firstCard.style.zIndex = 1; 
+        secondCard.style.zIndex = 1;
         resetTurn();
     }, 1200); // 1.2秒後にカードを裏返す
 }
