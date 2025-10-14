@@ -33,7 +33,7 @@ let timer;
 let seconds = 0;
 
 // 画像のパス
-const imagePath = 'images/';
+const imagePath = './images/';
 const imageCount = 13; // imagesフォルダにある画像の総数
 
 // イベントリスナーを設定
