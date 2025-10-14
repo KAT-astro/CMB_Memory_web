@@ -8,36 +8,36 @@ const hardRankingList = document.getElementById('hard-ranking');
 
 // 【かんたんモード用の画像リスト (12個)】
 const EASY_IMAGE_NAMES = [
-    'easy_cat.png',
-    'easy_dog.png',
-    'easy_bird.png',
-    'easy_fish.png',
-    'easy_rabbit.png',
-    'easy_hamster.png',
-    'easy_apple.png',
-    'easy_orange.png',
-    'easy_grape.png',
-    'easy_lemon.png',
-    'easy_car.png',
-    'easy_bus.png'
+    'LiteBIRD_easy.png',
+    'CMB_easy.png',
+    'CMB_vec_easy.png',
+    'Emode_easy.png',
+    'Bmode_easy.png',
+    'Inflation_easy.png',
+    'Q-30GHz_easy.png',
+    'Q-143GHz_easy.png',
+    'Q-353GHz_easy.png',
+    'U-30GHz_easy.png',
+    'U-143GHz_easy.png',
+    'U-353GHz_easy.png',
 ];
 
 // 【むずかしいモード用の画像リスト (14個)】
 const HARD_IMAGE_NAMES = [
-    'hard_spade.png',
-    'hard_heart.png',
-    'hard_diamond.png',
-    'hard_clover.png',
-    'hard_king.png',
-    'hard_queen.png',
-    'hard_jack.png',
-    'hard_joker.png',
-    'hard_sun.png',
-    'hard_moon.png',
-    'hard_star.png',
-    'hard_cloud.png',
-    'hard_tree.png',
-    'hard_flower.png'
+    'Q-30GHz_hard.png',
+    'Q-44GHz_hard.jpg',
+    'Q-70GHz_hard.png',
+    'Q-100GHz_hard.svg',
+    'Q-143GHz_hard.png',
+    'Q-217GHz_hard.jpg',
+    'Q-353GHz_hard.png',
+    'U-30GHz_hard.png',
+    'U-44GHz_hard.jpg',
+    'U-70GHz_hard.png',
+    'U-100GHz_hard.svg',
+    'U-143GHz_hard.png',
+    'U-217GHz_hard.jpg',
+    'U-353GHz_hard.png',
 ];
 
 // ゲームの状態を管理する変数
