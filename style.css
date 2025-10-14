@@ -84,8 +84,8 @@ function createBoard() {
     // 必要な数の画像を選ぶ
     let gameImages = [];
     for (let i = 1; i <= cardPairs; i++) {
-        gameImages.push(`${i}.png`);
-        gameImages.push(`${i}.png`); // ペアにする
+        gameImages.push(`${i}.jpg`);
+        gameImages.push(`${i}.jpg`); // ペアにする
     }
 
     // Fisher-Yatesアルゴリズムでシャッフル
