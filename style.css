@@ -112,15 +112,9 @@ button:hover {
 }
 
 .card-back {
-    background: linear-gradient(135deg, #6a82fb, #fc5c7d);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    color: white;
-}
-.card-back::after {
-    content: '❓'; /* 裏面のデザイン */
+    background-image: url('images/CMB_trump_back.png');
+    background-size: cover; /* 画像が要素に収まるように調整 */
+    background-position: center; /* 画像を中央に配置 */
 }
 
 #ranking {
