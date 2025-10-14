@@ -69,13 +69,13 @@ function startGame(mode) {
     const isEasy = (mode === 'easy');
     cardPairs = isEasy ? 12 : 14;
     
-    // 画像リストの枚数が足りているかチェック
     const requiredImages = isEasy ? EASY_IMAGE_NAMES.length : HARD_IMAGE_NAMES.length;
     if (requiredImages < cardPairs) {
         alert(`エラー: 画像の数が足りません。${mode}モードには${cardPairs}種類の画像が必要です。`);
         return;
     }
-
+    
+    // ★CSSクラスを切り替える
     gameBoard.className = '';
     gameBoard.classList.add(isEasy ? 'easy-grid' : 'hard-grid');
 
@@ -100,18 +100,15 @@ function resetGame() {
 }
 
 /**
- * カードをシャッフルしてボードを作成する関数
+ * カードをシャッフルしてボードを作成する関数（★シンプル化）
  */
 function createBoard() {
-    // 1. モードに応じて使用する画像リストを選択
     const imagesForThisGame = (currentMode === 'easy') ? EASY_IMAGE_NAMES : HARD_IMAGE_NAMES;
 
-    // 2. ペアになるように、リストを2倍にする
     let gameImages = [...imagesForThisGame, ...imagesForThisGame];
-    
-    shuffleArray(gameImages); // 最終的なカードリストをシャッフル
+    shuffleArray(gameImages);
 
-    // 3. カードを生成してゲームボードに追加
+    // ★カードを生成して追加するだけ（位置計算は不要）
     gameImages.forEach(imageName => {
         const card = document.createElement('div');
         card.classList.add('card');
@@ -142,20 +139,18 @@ function shuffleArray(array) {
     }
 }
 
+
 // これ以降の関数 (flipCard, checkForMatch など) は変更ありません
 // ... (以下、変更なし) ...
 
 function flipCard() {
     if (lockBoard || this.classList.contains('flipped') || this.classList.contains('matched')) return;
     if (this === firstCard) return;
-
     this.classList.add('flipped');
-
     if (!firstCard) {
         firstCard = this;
         return;
     }
-
     secondCard = this;
     lockBoard = true;
     checkForMatch();
@@ -171,10 +166,8 @@ function disableCards() {
     secondCard.removeEventListener('click', flipCard);
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
-
     matchedPairs++;
     resetTurn();
-    
     if (matchedPairs === cardPairs) {
         gameClear();
     }
@@ -213,10 +206,8 @@ function gameClear() {
 function saveRanking(timeInSeconds) {
     const rankingKey = currentMode === 'easy' ? 'easyRanking' : 'hardRanking';
     const rankings = JSON.parse(localStorage.getItem(rankingKey)) || [];
-    
     rankings.push(timeInSeconds);
     rankings.sort((a, b) => a - b);
-    
     localStorage.setItem(rankingKey, JSON.stringify(rankings.slice(0, 5)));
 }
 
@@ -228,9 +219,7 @@ function displayRankings() {
 function displayRankingForMode(mode, listElement) {
     const rankingKey = mode === 'easy' ? 'easyRanking' : 'hardRanking';
     const rankings = JSON.parse(localStorage.getItem(rankingKey)) || [];
-    
     listElement.innerHTML = '';
-    
     if (rankings.length === 0) {
         listElement.innerHTML = '<li>まだ記録がありません</li>';
     } else {
