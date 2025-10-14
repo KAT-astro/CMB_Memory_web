@@ -391,7 +391,7 @@ button:hover {
 }
 
 .card-back {
-    background-image: url('./images_back/CMB_trump_back.jpg');
+    background-image: url('images_back/CMB_trump_back.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 8px;
