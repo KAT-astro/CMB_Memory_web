@@ -13,6 +13,13 @@ h1, h2 {
     color: #2c3e50;
 }
 
+.controls {
+    display: flex;       /* Flexboxを有効にする */
+    align-items: center; /* ボタンの垂直方向（上下）を中央で揃える */
+    flex-wrap: wrap;     /* 画面幅が足りない時にボタンを折り返す */
+    gap: 10px;           /* ボタン同士の間隔を上下左右に10px空ける */
+}
+
 .panel {
     display: flex;
     justify-content: space-between;
@@ -35,7 +42,7 @@ button {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 
 button:hover {
@@ -53,7 +60,7 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s;
     text-decoration: none; /* リンクの下線を削除 */
-    vertical-align: middle; /* 他のボタンと垂直方向の位置を揃える */
+    /* vertical-align: middle; /* 他のボタンと垂直方向の位置を揃える */ */
 }
 
 #explanation-btn:hover {
