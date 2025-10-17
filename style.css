@@ -66,7 +66,7 @@ button:hover {
     color: #e74c3c;
 }
 
-/* ゲームボードの基本スタイル */
+/* /* ゲームボードの基本スタイル */
 #game-board {
     display: grid;
     gap: 10px;
@@ -98,6 +98,44 @@ button:hover {
 .card {
     width: 166px;
     height: 116px;
+    perspective: 1000px;
+    cursor: pointer;
+}*/
+
+/* ゲームボードの基本スタイル */
+#game-board {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1300px; /* PCでの最大幅は維持 */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#game-board p {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+}
+
+/* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
+.easy-grid {
+    /* 画面幅に合わせて列数を自動調整するように変更 */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
+.hard-grid {
+    /* 画面幅に合わせて列数を自動調整するように変更 */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+/* カードのスタイルを大きく変更 */
+.card {
+    /* widthとheightを削除し、aspect-ratioで比率を維持 */
+    aspect-ratio: 166 / 116; /* 元の画像の比率 (横 / 縦) */
     perspective: 1000px;
     cursor: pointer;
 }
