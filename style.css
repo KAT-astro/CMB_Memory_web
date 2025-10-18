@@ -208,3 +208,21 @@ button:hover {
     font-size: 18px;
     margin-bottom: 5px;
 }
+
+@media (max-width: 1300px) {
+    body {
+        /*
+         * 全体を中央揃えにすると、画面より広いゲーム盤の左側が
+         * 見えなくなるため、基本を「左揃え」に変更します。
+         */
+        align-items: flex-start;
+    }
+
+    /*
+     * ゲーム盤以外の要素（タイトル、パネル、ランキング）は
+     * 中央揃えを維持するように個別に設定し直します。
+     */
+    h1, .panel, #ranking {
+        align-self: center;
+    }
+}
