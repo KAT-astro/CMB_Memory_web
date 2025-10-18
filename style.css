@@ -131,11 +131,21 @@ button:hover {
 }
 
 /* カードのスタイルを大きく変更 */
-.card {
+/* .card {
     width: 166px;
     height: 116px;
     perspective: 1000px;
     cursor: pointer;
+} */
+
+/* カードのスタイルを大きく変更 */
+.card {
+    /* width: 166px; */  /* ← この行を削除またはコメントアウト */
+    /* height: 116px; */ /* ← この行を削除またはコメントアウト */
+    aspect-ratio: 166 / 116; /* ← 元の幅と高さの比率を追加 */
+    min-width: 0; /* ← グリッドが正しく縮小するために追加 */
+    perspective: 1000px;
+    cursor: pointer;
 }
 
 .card.matched {
