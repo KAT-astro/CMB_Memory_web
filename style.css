@@ -109,8 +109,18 @@ button:hover {
     cursor: pointer;
 }*/
 
+.game-board-container {
+  width: 100%;           /* コンテナ自体は画面幅いっぱいに */
+  overflow-x: auto;    /* ★ 中身がはみ出たら横スクロールバーを出す */
+  text-align: center;  /* 中身(#game-board)を中央揃えにする */
+  
+  /* 念のため、他の要素と幅を合わせる */
+  max-width: 1300px;
+  box-sizing: border-box; 
+}
+
 /* ゲームボードの基本スタイル */
-#game-board {
+/* #game-board {
     display: grid;
     gap: 10px;
     justify-content: center;
@@ -118,6 +128,16 @@ button:hover {
     max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
     padding: 10px;
     box-sizing: border-box;
+} */
+#game-board {
+    /* display: grid; */       /* ← 変更 */
+    display: inline-grid; /* ★ 変更: 中身の幅に合わせて自動調整 */
+    gap: 10px;
+    justify-content: center;
+    /* width: 100%; */          /* ★ 削除: これがあるとスクロールできない */
+    max-width: 1300px; 
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 /* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
@@ -131,21 +151,11 @@ button:hover {
 }
 
 /* カードのスタイルを大きく変更 */
-/* .card {
+.card {
     width: 166px;
     height: 116px;
     perspective: 1000px;
     cursor: pointer;
-} */
-
-/* カードのスタイルを大きく変更 */
-.card {
-    /* width: 166px; */  /* ← この行を削除またはコメントアウト */
-    /* height: 116px; */ /* ← この行を削除またはコメントアウト */
-    aspect-ratio: 166 / 116; /* ← 元の幅と高さの比率を追加 */
-    min-width: 0; /* ← グリッドが正しく縮小するために追加 */
-    perspective: 1000px;
-    cursor: pointer;
 }
 
 .card.matched {
@@ -219,7 +229,7 @@ button:hover {
     margin-bottom: 5px;
 }
 
-@media (max-width: 1300px) {
+/* @media (max-width: 1300px) {
     body {
         /*
          * 全体を中央揃えにすると、画面より広いゲーム盤の左側が
@@ -234,5 +244,5 @@ button:hover {
      */
     h1, .panel, #ranking {
         align-self: center;
-    }
+    } */
 }
