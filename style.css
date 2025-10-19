@@ -141,15 +141,23 @@ button:hover {
 }
 
 /* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
-.easy-grid {
+/* .easy-grid {
     grid-template-columns: repeat(6, 1fr);
 }
 
 /* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
 .hard-grid {
     grid-template-columns: repeat(7, 1fr);
+} */
+
+.easy-grid {
+    grid-template-columns: repeat(6, 166px); /* ← 1fr から 166px に変更 */
 }
 
+/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
+.hard-grid {
+    grid-template-columns: repeat(7, 166px); /* ← 1fr から 166px に変更 */
+}
 /* カードのスタイルを大きく変更 */
 .card {
     width: 166px;
