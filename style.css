@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -253,4 +253,328 @@ button:hover {
     h1, .panel, #ranking {
         align-self: center;
     } */
+} */
+
+
+/* 全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2c3e50; /* ダークネイビー (青系) */
+    color: #ecf0f1; /* 明るいグレー (文字色) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    color: #f39c12; /* 鮮やかなオレンジ */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+/* パネル (コントロールとタイマー) */
+.panel {
+    background-color: #34495e; /* 少し明るいネイビー */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+button, #explanation-btn {
+    background-color: #e67e22; /* ボタンのオレンジ */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* aタグのスタイルをリセット */
+    display: inline-block; /* aタグをボタンのように見せる */
+    text-align: center;
+}
+
+button:hover, #explanation-btn:hover {
+    background-color: #d35400; /* ホバーで濃いオレンジ */
+    transform: translateY(-2px);
+}
+
+#timer {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #f1c40f; /* 警告色に近いオレンジ */
+    background-color: #2c3e50;
+    padding: 8px 15px;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ゲームボード */
+#game-board {
+    background-color: #34495e; /* パネルと同じ背景色 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: grid;
+    gap: 15px; /* カード間の間隔 */
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 900px; /* 必要に応じて調整 */
+}
+
+#game-board p {
+    font-size: 1.2em;
+    text-align: center;
+    color: #bdc3c7;
+}
+
+/* グリッドレイアウトの定義 */
+.easy-grid {
+    grid-template-columns: repeat(6, 120px); /* 12枚のカードなので6x4 (2列は空くが揃う) */
+    grid-template-rows: repeat(4, 120px);
+}
+
+.hard-grid {
+    grid-template-columns: repeat(7, 100px); /* 14枚のカードなので7x4 */
+    grid-template-rows: repeat(4, 100px);
+}
+
+
+/* カードのスタイル */
+.card {
+    width: 120px; /* 簡単モードのカードサイズ */
+    height: 120px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid #5fa2dd; /* カードの縁取り (青系) */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+/* 難しいモードのカードサイズ調整 */
+.hard-grid .card {
+    width: 100px;
+    height: 100px;
+}
+
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* バウンド効果 */
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 6px; /* 親のborder-radiusより小さくする */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front {
+    background-color: #ecf0f1; /* カードの表面（画像側） */
+    transform: rotateY(180deg);
+    overflow: hidden; /* 画像がはみ出さないように */
+}
+
+.card-front img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 4px; /* 画像にも少し角丸を */
+}
+
+.card-back {
+    background-color: #3498db; /* カードの裏面（青） */
+    border: 3px solid #f1c40f; /* 裏面の縁取り (オレンジ) */
+    font-size: 3em;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 1; /* 中央揃え */
+    display: flex; /* 中央配置のため */
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(45deg, #3498db 25%, #2980b9 25%, #2980b9 50%, #3498db 50%, #3498db 75%, #2980b9 75%, #2980b9);
+    background-size: 20px 20px; /* テクスチャのような模様 */
+}
+
+.card.matched {
+    opacity: 0.7; /* マッチしたカードを少し薄くする */
+    pointer-events: none; /* クリック不可に */
+    border-color: #27ae60; /* マッチしたら緑の縁取り */
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8); /* 緑の光 */
+}
+
+
+/* ランキングセクション */
+#ranking {
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ranking-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.ranking-container > div {
+    background-color: #2c3e50;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 250px;
+}
+
+#easy-ranking, #hard-ranking {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    color: #bdc3c7;
+    font-size: 1.1em;
+}
+
+#easy-ranking li, #hard-ranking li {
+    background-color: #34495e;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #f39c12; /* ランキングリストのアクセント */
+}
+
+#easy-ranking li:nth-child(1), #hard-ranking li:nth-child(1) {
+    font-weight: bold;
+    color: #f1c40f; /* 1位は特に目立つ色 */
+    border-color: #f1c40f;
+}
+
+/* ルビのスタイル */
+ruby {
+    /* デフォルトの表示を維持しつつ、もし必要ならここで調整 */
+    ruby-align: center; /* ルビの位置を中央に */
+}
+
+rt {
+    font-size: 0.6em; /* ルビのフォントサイズを小さく */
+    color: #bdc3c7; /* ルビの色を少し抑える */
+    user-select: none; /* ルビが選択されないように */
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .panel, #game-board, #ranking {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button, #explanation-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .easy-grid {
+        grid-template-columns: repeat(4, 70px); /* スマホ用に列を減らす */
+        grid-template-rows: repeat(6, 70px);
+        gap: 10px;
+    }
+    
+    .hard-grid {
+        grid-template-columns: repeat(4, 60px); /* スマホ用に列を減らす */
+        grid-template-rows: repeat(7, 60px);
+        gap: 8px;
+    }
+
+    .card {
+        width: 70px;
+        height: 70px;
+        border-width: 1px;
+    }
+
+    .hard-grid .card {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-back {
+        font-size: 2em;
+    }
+
+    .ranking-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .easy-grid {
+        grid-template-columns: repeat(3, 80px); /* さらに調整 */
+        grid-template-rows: repeat(8, 80px);
+    }
+    .hard-grid {
+        grid-template-columns: repeat(3, 70px); /* さらに調整 */
+        grid-template-rows: repeat(10, 70px);
+    }
+
+    .card {
+        width: 80px;
+        height: 80px;
+    }
+
+    .hard-grid .card {
+        width: 70px;
+        height: 70px;
+    }
 }
