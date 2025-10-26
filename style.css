@@ -1,275 +1,18 @@
-/* body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-}
-
-h1, h2 {
-    color: #2c3e50;
-}
-
-.controls {
-    display: flex;       /* Flexboxを有効にする */
-    align-items: center; /* ボタンの垂直方向（上下）を中央で揃える */
-    flex-wrap: wrap;     /* 画面幅が足りない時にボタンを折り返す */
-    gap: 10px;           /* ボタン同士の間隔を上下左右に10px空ける */
-}
-
-.panel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
-    margin-bottom: 20px;
-    background: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    /* margin-right: 10px; */
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-#explanation-btn {
-    display: inline-block;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #27ae60; /* ボタンの色を緑系に設定 */
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none; /* リンクの下線を削除 */
-    /* vertical-align: middle; /* 他のボタンと垂直方向の位置を揃える */ */
-}
-
-#explanation-btn:hover {
-    background-color: #229954;
-}
-
-#timer {
-    font-size: 20px;
-    font-weight: bold;
-    color: #e74c3c;
-}
-
-/* /* ゲームボードの基本スタイル */
-#game-board {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-#game-board p {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: #666;
-    font-size: 18px;
-}
-
-/* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
-.easy-grid {
-    grid-template-columns: repeat(6, 1fr);
-}
-
-/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
-.hard-grid {
-    grid-template-columns: repeat(7, 1fr);
-}
-
-/* カードのスタイルを大きく変更 */
-.card {
-    width: 166px;
-    height: 116px;
-    perspective: 1000px;
-    cursor: pointer;
-}*/
-
-.game-board-container {
-  width: 100%;           /* コンテナ自体は画面幅いっぱいに */
-  overflow-x: auto;    /* ★ 中身がはみ出たら横スクロールバーを出す */
-  text-align: center;  /* 中身(#game-board)を中央揃えにする */
-  
-  /* 念のため、他の要素と幅を合わせる */
-  max-width: 1300px;
-  box-sizing: border-box; 
-}
-
-/* ゲームボードの基本スタイル */
-/* #game-board {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    max-width: 1300px; /* 難しいモードに合わせて最大幅を広げる */
-    padding: 10px;
-    box-sizing: border-box;
-} */
-#game-board {
-    /* display: grid; */       /* ← 変更 */
-    display: inline-grid; /* ★ 変更: 中身の幅に合わせて自動調整 */
-    gap: 10px;
-    justify-content: center;
-    /* width: 100%; */          /* ★ 削除: これがあるとスクロールできない */
-    max-width: 1300px; 
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* ★簡単モード (横6枚 x 縦4行) 用のグリッド設定 */
-/* .easy-grid {
-    grid-template-columns: repeat(6, 1fr);
-}
-
-/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
-.hard-grid {
-    grid-template-columns: repeat(7, 1fr);
-} */
-
-.easy-grid {
-    grid-template-columns: repeat(6, 166px); /* ← 1fr から 166px に変更 */
-}
-
-/* ★難しいモード (横7枚 x 縦4行) 用のグリッド設定 */
-.hard-grid {
-    grid-template-columns: repeat(7, 166px); /* ← 1fr から 166px に変更 */
-}
-/* カードのスタイルを大きく変更 */
-.card {
-    width: 166px;
-    height: 116px;
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.card.matched {
-    opacity: 0.5;
-    cursor: default;
-    transform: scale(0.95);
-    transition: opacity 0.5s, transform 0.5s;
-}
-
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.card-front {
-    transform: rotateY(180deg);
-    background-color: #fff; 
-}
-
-.card-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-    border-radius: 8px;
-}
-
-.card-back {
-    background-image: url('images_back/LiteBIRD_trump_back.png');
-    background-size: cover;
-    background-position: center;
-}
-
-#ranking {
-    margin-top: 30px;
-    width: 90%;
-    max-width: 800px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.ranking-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-#ranking ol {
-    padding-left: 20px;
-}
-
-#ranking li {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-/* @media (max-width: 1300px) {
-    body {
-        /*
-         * 全体を中央揃えにすると、画面より広いゲーム盤の左側が
-         * 見えなくなるため、基本を「左揃え」に変更します。
-         */
-        align-items: flex-start;
-    }
-
-    /*
-     * ゲーム盤以外の要素（タイトル、パネル、ランキング）は
-     * 中央揃えを維持するように個別に設定し直します。
-     */
-    h1, .panel, #ranking {
-        align-self: center;
-    } */
-} */
-
-
 /* 全体のスタイル */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #2c3e50; /* ダークネイビー (青系) */
+    background-color: #2c3e50; /* 画面全体の背景色 (紺) */
     color: #ecf0f1; /* 明るいグレー (文字色) */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* ブロック要素を中央寄せ */
     justify-content: center;
     min-height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
+    text-align: center; /* ★ h1なども含め全体を中央寄せ */
 }
 
 h1, h2, h3 {
@@ -298,8 +41,8 @@ h1, h2, h3 {
     gap: 15px;
 }
 
+/* ★ ボタンの共通スタイル */
 button, #explanation-btn {
-    background-color: #e67e22; /* ボタンのオレンジ */
     color: white;
     border: none;
     padding: 12px 25px;
@@ -307,15 +50,27 @@ button, #explanation-btn {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none; /* aタグのスタイルをリセット */
-    display: inline-block; /* aタグをボタンのように見せる */
+    text-decoration: none;
+    display: inline-block;
     text-align: center;
 }
 
 button:hover, #explanation-btn:hover {
-    background-color: #d35400; /* ホバーで濃いオレンジ */
     transform: translateY(-2px);
+    opacity: 0.9;
 }
+
+/* ★ ボタンの色を個別に設定 */
+#easy-btn {
+    background-color: #3498db; /* 青 */
+}
+#hard-btn {
+    background-color: #2980b9; /* 濃い青 */
+}
+#explanation-btn {
+    background-color: #f39c12; /* オレンジ */
+}
+
 
 #timer {
     font-size: 1.8em;
@@ -350,20 +105,19 @@ button:hover, #explanation-btn:hover {
 
 /* グリッドレイアウトの定義 */
 .easy-grid {
-    grid-template-columns: repeat(6, 120px); /* 12枚のカードなので6x4 (2列は空くが揃う) */
+    grid-template-columns: repeat(6, 120px); 
     grid-template-rows: repeat(4, 120px);
 }
 
 .hard-grid {
-    grid-template-columns: repeat(7, 100px); /* 14枚のカードなので7x4 */
+    grid-template-columns: repeat(7, 100px);
     grid-template-rows: repeat(4, 100px);
 }
 
 
 /* カードのスタイル */
 .card {
-    width: 120px; /* 簡単モードのカードサイズ */
-    height: 120px;
+    /* ★ widthとheightを削除。グリッド側で指定する */
     perspective: 1000px;
     cursor: pointer;
     position: relative;
@@ -373,7 +127,11 @@ button:hover, #explanation-btn:hover {
     transition: transform 0.3s ease;
 }
 
-/* 難しいモードのカードサイズ調整 */
+/* ★ カードのサイズをグリッドごとに指定 */
+.easy-grid .card {
+    width: 120px;
+    height: 120px;
+}
 .hard-grid .card {
     width: 100px;
     height: 100px;
@@ -385,7 +143,7 @@ button:hover, #explanation-btn:hover {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* バウンド効果 */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .card.flipped .card-inner {
@@ -397,7 +155,7 @@ button:hover, #explanation-btn:hover {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 6px; /* 親のborder-radiusより小さくする */
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -406,35 +164,28 @@ button:hover, #explanation-btn:hover {
 .card-front {
     background-color: #ecf0f1; /* カードの表面（画像側） */
     transform: rotateY(180deg);
-    overflow: hidden; /* 画像がはみ出さないように */
+    overflow: hidden;
 }
 
 .card-front img {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
-    border-radius: 4px; /* 画像にも少し角丸を */
+    border-radius: 4px;
 }
 
+/* ★ カード裏面のスタイルを元に戻す (シンプル化) */
 .card-back {
-    background-color: #3498db; /* カードの裏面（青） */
-    border: 3px solid #f1c40f; /* 裏面の縁取り (オレンジ) */
-    font-size: 3em;
-    font-weight: bold;
-    color: #2c3e50;
-    line-height: 1; /* 中央揃え */
-    display: flex; /* 中央配置のため */
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(45deg, #3498db 25%, #2980b9 25%, #2980b9 50%, #3498db 50%, #3498db 75%, #2980b9 75%, #2980b9);
-    background-size: 20px 20px; /* テクスチャのような模様 */
+    background-color: #3498db; /* 青 */
+    border: 3px solid #f1c40f; /* オレンジの枠 */
+    /* 模様や文字を削除 */
 }
 
 .card.matched {
-    opacity: 0.7; /* マッチしたカードを少し薄くする */
-    pointer-events: none; /* クリック不可に */
-    border-color: #27ae60; /* マッチしたら緑の縁取り */
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8); /* 緑の光 */
+    opacity: 0.7;
+    pointer-events: none;
+    border-color: #27ae60;
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8);
 }
 
 
@@ -466,12 +217,20 @@ button:hover, #explanation-btn:hover {
     min-width: 250px;
 }
 
+/* ★ ランキングリスト (番号表示のため修正) */
 #easy-ranking, #hard-ranking {
-    list-style-type: none;
+    list-style-type: none; /* デフォルトの数字は消す */
     padding: 0;
+    margin: 0;
+    counter-reset: ranking-counter; /* 順位カウンターを初期化 */
     text-align: left;
     color: #bdc3c7;
     font-size: 1.1em;
+}
+
+/* ★ 2つ目のリストでカウンターをリセット */
+#hard-ranking {
+    counter-reset: ranking-counter;
 }
 
 #easy-ranking li, #hard-ranking li {
@@ -482,7 +241,25 @@ button:hover, #explanation-btn:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 5px solid #f39c12; /* ランキングリストのアクセント */
+    border-left: 5px solid #f39c12;
+    position: relative; /* 順位表示の基準位置 */
+    padding-left: 50px; /* 順位を表示するスペースを確保 */
+}
+
+/* ★ CSSカウンターを使って順位を表示 */
+#easy-ranking li::before, #hard-ranking li::before {
+    counter-increment: ranking-counter; /* <li>ごとにカウンターを+1 */
+    content: counter(ranking-counter) "位"; /* "1位", "2位"... と表示 */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #f39c12; /* 順位の数字の色 */
+    font-size: 1.1em;
+    min-width: 30px;
+    text-align: right;
+    padding-right: 5px;
 }
 
 #easy-ranking li:nth-child(1), #hard-ranking li:nth-child(1) {
@@ -491,16 +268,22 @@ button:hover, #explanation-btn:hover {
     border-color: #f1c40f;
 }
 
+/* ★ 1位の順位表示も目立たせる */
+#easy-ranking li:nth-child(1)::before, #hard-ranking li:nth-child(1)::before {
+    color: #f1c40f;
+    font-size: 1.2em;
+}
+
+
 /* ルビのスタイル */
 ruby {
-    /* デフォルトの表示を維持しつつ、もし必要ならここで調整 */
-    ruby-align: center; /* ルビの位置を中央に */
+    ruby-align: center;
 }
 
 rt {
-    font-size: 0.6em; /* ルビのフォントサイズを小さく */
-    color: #bdc3c7; /* ルビの色を少し抑える */
-    user-select: none; /* ルビが選択されないように */
+    font-size: 0.6em;
+    color: #bdc3c7;
+    user-select: none;
 }
 
 
@@ -527,30 +310,26 @@ rt {
     }
 
     .easy-grid {
-        grid-template-columns: repeat(4, 70px); /* スマホ用に列を減らす */
+        grid-template-columns: repeat(4, 70px);
         grid-template-rows: repeat(6, 70px);
         gap: 10px;
     }
     
     .hard-grid {
-        grid-template-columns: repeat(4, 60px); /* スマホ用に列を減らす */
+        grid-template-columns: repeat(4, 60px);
         grid-template-rows: repeat(7, 60px);
         gap: 8px;
     }
 
-    .card {
+    /* ★ レスポンシブでもカードサイズを指定 */
+    .easy-grid .card {
         width: 70px;
         height: 70px;
-        border-width: 1px;
     }
-
+    
     .hard-grid .card {
         width: 60px;
         height: 60px;
-    }
-
-    .card-back {
-        font-size: 2em;
     }
 
     .ranking-container {
@@ -560,15 +339,15 @@ rt {
 
 @media (max-width: 480px) {
     .easy-grid {
-        grid-template-columns: repeat(3, 80px); /* さらに調整 */
+        grid-template-columns: repeat(3, 80px);
         grid-template-rows: repeat(8, 80px);
     }
     .hard-grid {
-        grid-template-columns: repeat(3, 70px); /* さらに調整 */
+        grid-template-columns: repeat(3, 70px);
         grid-template-rows: repeat(10, 70px);
     }
 
-    .card {
+    .easy-grid .card {
         width: 80px;
         height: 80px;
     }
