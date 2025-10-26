@@ -1,29 +1,29 @@
 /* 全体のスタイル */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #2c3e50; /* 画面全体の背景色 (紺) */
-    color: #ecf0f1; /* 明るいグレー (文字色) */
+    background-color: #2c3e50; /* 画面全体の背景色 (紺) - 変更なし */
+    color: #ffffff; /* ★ 明るいグレーから純粋な白に変更 */
     display: flex;
     flex-direction: column;
-    align-items: center; /* ブロック要素を中央寄せ */
+    align-items: center;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
-    text-align: center; /* ★ h1なども含め全体を中央寄せ */
+    text-align: center;
 }
 
 h1, h2, h3 {
-    color: #f39c12; /* 鮮やかなオレンジ */
+    color: #ff9900; /* ★ 鮮やかなオレンジに変更 */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
 }
 
 /* パネル (コントロールとタイマー) */
 .panel {
-    background-color: #34495e; /* 少し明るいネイビー */
+    background-color: #546e7a; /* ★ 少し明るい青系グレーに変更 */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -41,7 +41,7 @@ h1, h2, h3 {
     gap: 15px;
 }
 
-/* ★ ボタンの共通スタイル */
+/* ボタンの共通スタイル */
 button, #explanation-btn {
     color: white;
     border: none;
@@ -60,22 +60,22 @@ button:hover, #explanation-btn:hover {
     opacity: 0.9;
 }
 
-/* ★ ボタンの色を個別に設定 */
+/* ボタンの色を個別に設定 */
 #easy-btn {
-    background-color: #3498db; /* 青 */
+    background-color: #4fc3f7; /* ★ 明るい青に変更 */
 }
 #hard-btn {
-    background-color: #2980b9; /* 濃い青 */
+    background-color: #03a9f4; /* ★ 鮮やかな青に変更 */
 }
 #explanation-btn {
-    background-color: #f39c12; /* オレンジ */
+    background-color: #ff9900; /* ★ 鮮やかなオレンジに変更 */
 }
 
 
 #timer {
     font-size: 1.8em;
     font-weight: bold;
-    color: #f1c40f; /* 警告色に近いオレンジ */
+    color: #ffc107; /* ★ 明るいゴールドに変更 */
     background-color: #2c3e50;
     padding: 8px 15px;
     border-radius: 5px;
@@ -84,17 +84,17 @@ button:hover, #explanation-btn:hover {
 
 /* ゲームボード */
 #game-board {
-    background-color: #34495e; /* パネルと同じ背景色 */
+    background-color: #546e7a; /* ★ 少し明るい青系グレーに変更 */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     display: grid;
-    gap: 15px; /* カード間の間隔 */
+    gap: 15px;
     justify-content: center;
     align-content: center;
     margin-bottom: 30px;
     width: 100%;
-    max-width: 900px; /* 必要に応じて調整 */
+    max-width: 900px;
 }
 
 #game-board p {
@@ -115,19 +115,7 @@ button:hover, #explanation-btn:hover {
 }
 
 
-/* カードのスタイル */
-/* .card {
-    /* ★ widthとheightを削除。グリッド側で指定する */
-    perspective: 1000px;
-    cursor: pointer;
-    position: relative;
-    border: 2px solid #5fa2dd; /* カードの縁取り (青系) */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-} */
-
-/* ★ カードのサイズをグリッドごとに指定 */
+/* カードのサイズをグリッドごとに指定 */
 .easy-grid .card {
     width: 120px;
     height: 120px;
@@ -136,7 +124,6 @@ button:hover, #explanation-btn:hover {
     width: 100px;
     height: 100px;
 }
-
 
 .card-inner {
     width: 100%;
@@ -156,8 +143,7 @@ button:hover, #explanation-btn:hover {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 5px; /* ★ ボーダーの内側なので少し小さく */
 }
 
 .card-front {
@@ -169,20 +155,13 @@ button:hover, #explanation-btn:hover {
     width: 100%;
     height: 100%;
     object-fit: contain; 
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .card-back {
     background-image: url('images_back/LiteBIRD_trump_back.png');
     background-size: cover;
     background-position: center;
-}
-
-.card.matched {
-    opacity: 0.7;
-    pointer-events: none;
-    border-color: #27ae60;
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8);
 }
 
 .card {
@@ -198,10 +177,9 @@ button:hover, #explanation-btn:hover {
     transform: scale(0.95);
     transition: opacity 0.5s, transform 0.5s;
 }
-
 /* ランキングセクション */
 #ranking {
-    background-color: #34495e;
+    background-color: #546e7a; /* ★ 少し明るい青系グレーに変更 */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -219,7 +197,7 @@ button:hover, #explanation-btn:hover {
 }
 
 .ranking-container > div {
-    background-color: #2c3e50;
+    background-color: #34495e; /* ★ 暗い色に戻してコントラストを出す */
     padding: 15px;
     border-radius: 8px;
     box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -227,45 +205,44 @@ button:hover, #explanation-btn:hover {
     min-width: 250px;
 }
 
-/* ★ ランキングリスト (番号表示のため修正) */
+/* ランキングリスト */
 #easy-ranking, #hard-ranking {
-    list-style-type: none; /* デフォルトの数字は消す */
+    list-style-type: none;
     padding: 0;
     margin: 0;
-    counter-reset: ranking-counter; /* 順位カウンターを初期化 */
+    counter-reset: ranking-counter;
     text-align: left;
     color: #bdc3c7;
     font-size: 1.1em;
 }
 
-/* ★ 2つ目のリストでカウンターをリセット */
 #hard-ranking {
     counter-reset: ranking-counter;
 }
 
 #easy-ranking li, #hard-ranking li {
-    background-color: #34495e;
+    background-color: #546e7a; /* ★ 明るいコンテナ色に合わせる */
     margin-bottom: 8px;
     padding: 10px 15px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 5px solid #f39c12;
-    position: relative; /* 順位表示の基準位置 */
-    padding-left: 50px; /* 順位を表示するスペースを確保 */
+    border-left: 5px solid #ff9900; /* ★ 鮮やかなオレンジに変更 */
+    position: relative;
+    padding-left: 50px;
 }
 
-/* ★ CSSカウンターを使って順位を表示 */
+/* CSSカウンターを使って順位を表示 */
 #easy-ranking li::before, #hard-ranking li::before {
-    counter-increment: ranking-counter; /* <li>ごとにカウンターを+1 */
-    content: counter(ranking-counter) "位"; /* "1位", "2位"... と表示 */
+    counter-increment: ranking-counter;
+    content: counter(ranking-counter) "位";
     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
     font-weight: bold;
-    color: #f39c12; /* 順位の数字の色 */
+    color: #ff9900; /* ★ 鮮やかなオレンジに変更 */
     font-size: 1.1em;
     min-width: 30px;
     text-align: right;
@@ -274,13 +251,12 @@ button:hover, #explanation-btn:hover {
 
 #easy-ranking li:nth-child(1), #hard-ranking li:nth-child(1) {
     font-weight: bold;
-    color: #f1c40f; /* 1位は特に目立つ色 */
-    border-color: #f1c40f;
+    color: #ffc107; /* ★ 明るいゴールドに変更 */
+    border-color: #ffc107; /* ★ 明るいゴールドに変更 */
 }
 
-/* ★ 1位の順位表示も目立たせる */
-#easy-ranking li:nth-child(1)::before, #hard-ranking li:nth-child(1)::before {
-    color: #f1c40f;
+#easy-ranking li:nth-child(1):::before, #hard-ranking li:nth-child(1)::before {
+    color: #ffc107; /* ★ 明るいゴールドに変更 */
     font-size: 1.2em;
 }
 
@@ -297,7 +273,7 @@ rt {
 }
 
 
-/* レスポンシブデザイン */
+/* レスポンシブデザイン (変更なし) */
 @media (max-width: 768px) {
     h1 {
         font-size: 1.8em;
@@ -331,7 +307,6 @@ rt {
         gap: 8px;
     }
 
-    /* ★ レスポンシブでもカードサイズを指定 */
     .easy-grid .card {
         width: 70px;
         height: 70px;
