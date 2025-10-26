@@ -115,7 +115,7 @@ button:hover, #explanation-btn:hover {
 }
 
 
-/* カードのサイズをグリッドごとに指定 */
+/* /* カードのサイズをグリッドごとに指定 */
 .easy-grid .card {
     width: 120px;
     height: 120px;
@@ -123,7 +123,7 @@ button:hover, #explanation-btn:hover {
 .hard-grid .card {
     width: 100px;
     height: 100px;
-}
+} */
 
 .card-inner {
     width: 100%;
