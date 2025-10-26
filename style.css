@@ -106,12 +106,12 @@ button:hover, #explanation-btn:hover {
 /* グリッドレイアウトの定義 */
 .easy-grid {
     grid-template-columns: repeat(6, 120px); 
-    grid-template-rows: repeat(4, 120px);
+    /* grid-template-rows: repeat(4, 120px); */
 }
 
 .hard-grid {
     grid-template-columns: repeat(7, 100px);
-    grid-template-rows: repeat(4, 100px);
+    /* grid-template-rows: repeat(4, 100px); */
 }
 
 
