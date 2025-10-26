@@ -116,7 +116,7 @@ button:hover, #explanation-btn:hover {
 
 
 /* カードのスタイル */
-.card {
+/* .card {
     /* ★ widthとheightを削除。グリッド側で指定する */
     perspective: 1000px;
     cursor: pointer;
@@ -125,7 +125,7 @@ button:hover, #explanation-btn:hover {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
-}
+} */
 
 /* ★ カードのサイズをグリッドごとに指定 */
 .easy-grid .card {
@@ -185,6 +185,19 @@ button:hover, #explanation-btn:hover {
     box-shadow: 0 0 15px rgba(39, 174, 96, 0.8);
 }
 
+.card {
+    width: 166px;
+    height: 116px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card.matched {
+    opacity: 0.5;
+    cursor: default;
+    transform: scale(0.95);
+    transition: opacity 0.5s, transform 0.5s;
+}
 
 /* ランキングセクション */
 #ranking {
