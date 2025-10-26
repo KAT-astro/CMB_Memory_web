@@ -154,31 +154,28 @@ button:hover, #explanation-btn:hover {
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .card-front {
-    background-color: #ecf0f1; /* カードの表面（画像側） */
     transform: rotateY(180deg);
-    overflow: hidden;
+    background-color: #fff; 
 }
 
 .card-front img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    border-radius: 8px;
 }
 
-/* ★ カード裏面のスタイルを元に戻す (シンプル化) */
 .card-back {
-    background-color: #3498db; /* 青 */
-    border: 3px solid #f1c40f; /* オレンジの枠 */
-    /* 模様や文字を削除 */
+    background-image: url('images_back/LiteBIRD_trump_back.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .card.matched {
