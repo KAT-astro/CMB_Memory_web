@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     text-align: center;
 }
 
@@ -83,7 +83,7 @@ button:hover, #explanation-btn:hover {
 }
 
 /* ゲームボード */
-#game-board {
+/* #game-board {
     background-color: #546e7a; /* ★ 少し明るい青系グレーに変更 */
     padding: 20px;
     border-radius: 10px;
@@ -94,7 +94,20 @@ button:hover, #explanation-btn:hover {
     align-content: center;
     margin-bottom: 30px;
     width: 100%;
-    max-width: 900px;
+    max-width: 900px; */
+/* } */
+#game-board {
+    background-color: #546e7a; /* ← ダークテーマの色を維持 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: inline-grid;   /* ★ grid から inline-grid に変更 */
+    gap: 10px;             /* ★ 15px から 10px に変更 (元のコード) */
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 30px;
+    /* width: 100%; */       /* ★ 削除 */
+    max-width: 1300px;     /* ★ 900px から 1300px に変更 */
 }
 
 #game-board p {
@@ -105,18 +118,14 @@ button:hover, #explanation-btn:hover {
 
 /* グリッドレイアウトの定義 */
 .easy-grid {
-    grid-template-columns: repeat(6, 120px); 
-    /* grid-template-rows: repeat(4, 120px); */
+    grid-template-columns: repeat(6, 166px); 
 }
-
 .hard-grid {
-    grid-template-columns: repeat(7, 100px);
-    /* grid-template-rows: repeat(4, 100px); */
+    grid-template-columns: repeat(7, 166px);
 }
-
 
 /* /* カードのサイズをグリッドごとに指定 */
-.easy-grid .card {
+/* .easy-grid .card {
     width: 120px;
     height: 120px;
 }
@@ -176,7 +185,63 @@ button:hover, #explanation-btn:hover {
     cursor: default;
     transform: scale(0.95);
     transition: opacity 0.5s, transform 0.5s;
+} */
+
+/* カードのスタイルを大きく変更 */
+.card {
+    width: 166px;
+    height: 116px;
+    perspective: 1000px;
+    cursor: pointer;
 }
+
+.card.matched {
+    opacity: 0.5;
+    cursor: default;
+    transform: scale(0.95);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card-front {
+    transform: rotateY(180deg);
+    background-color: #fff; 
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    border-radius: 8px;
+}
+
+.card-back {
+    background-image: url('images_back/LiteBIRD_trump_back.png');
+    background-size: cover;
+    background-position: center;
+}
+
 /* ランキングセクション */
 #ranking {
     background-color: #546e7a; /* ★ 少し明るい青系グレーに変更 */
