@@ -125,7 +125,7 @@ button:hover, #explanation-btn:hover {
     grid-template-columns: repeat(7, 166px);
 }
 
-/* /* カードのサイズをグリッドごとに指定 */
+/* カードのサイズをグリッドごとに指定 */
 /* .easy-grid .card {
     width: 120px;
     height: 120px;
@@ -186,7 +186,7 @@ button:hover, #explanation-btn:hover {
     cursor: default;
     transform: scale(0.95);
     transition: opacity 0.5s, transform 0.5s;
-}  */
+} 
 
 /* カードのスタイルを大きく変更 */
 .card {
