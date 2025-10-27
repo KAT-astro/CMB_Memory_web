@@ -108,6 +108,7 @@ button:hover, #explanation-btn:hover {
     margin-bottom: 30px;
     /* width: 100%; */       /* ★ 削除 */
     max-width: 1300px;     /* ★ 900px から 1300px に変更 */
+    grid-template-columns: repeat(6, 166px);
 }
 
 #game-board p {
