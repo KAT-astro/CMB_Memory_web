@@ -135,7 +135,7 @@ button:hover, #explanation-btn:hover {
     height: 100px;
 } */
 
-.card-inner {
+/* .card-inner {
     width: 100%;
     height: 100%;
     position: relative;
@@ -186,7 +186,7 @@ button:hover, #explanation-btn:hover {
     cursor: default;
     transform: scale(0.95);
     transition: opacity 0.5s, transform 0.5s;
-} */
+}  */
 
 /* カードのスタイルを大きく変更 */
 .card {
@@ -339,7 +339,7 @@ rt {
 }
 
 
-/* レスポンシブデザイン (変更なし) */
+/* /* レスポンシブデザイン (変更なし) */
 @media (max-width: 768px) {
     h1 {
         font-size: 1.8em;
@@ -407,4 +407,4 @@ rt {
         width: 70px;
         height: 70px;
     }
-}
+} */
