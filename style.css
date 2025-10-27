@@ -339,72 +339,72 @@ rt {
 }
 
 
-/* /* レスポンシブデザイン (変更なし) */
+/* レスポンシブデザイン (変更なし) */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
-    }
+    h1 {
+        font-size: 1.8em;
+    }
 
-    .panel, #game-board, #ranking {
-        padding: 15px;
-        margin-bottom: 20px;
-    }
+    .panel, #game-board, #ranking {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
 
-    .controls {
-        flex-direction: column;
-        gap: 10px;
-    }
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-    button, #explanation-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 1em;
-    }
+    button, #explanation-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+    }
 
-    .easy-grid {
-        grid-template-columns: repeat(4, 70px);
-        grid-template-rows: repeat(6, 70px);
-        gap: 10px;
-    }
-    
-    .hard-grid {
-        grid-template-columns: repeat(4, 60px);
-        grid-template-rows: repeat(7, 60px);
-        gap: 8px;
-    }
+    .easy-grid {
+        grid-template-columns: repeat(4, 70px);
+        grid-template-rows: repeat(6, 70px);
+        gap: 10px;
+    }
+    
+    .hard-grid {
+        grid-template-columns: repeat(4, 60px);
+        grid-template-rows: repeat(7, 60px);
+        gap: 8px;
+    }
 
-    .easy-grid .card {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .hard-grid .card {
-        width: 60px;
-        height: 60px;
-    }
+    .easy-grid .card {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .hard-grid .card {
+        width: 60px;
+        height: 60px;
+    }
 
-    .ranking-container {
-        flex-direction: column;
-    }
+    .ranking-container {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 480px) {
-    .easy-grid {
-        grid-template-columns: repeat(3, 80px);
-        grid-template-rows: repeat(8, 80px);
-    }
-    .hard-grid {
-        grid-template-columns: repeat(3, 70px);
-        grid-template-rows: repeat(10, 70px);
-    }
+    .easy-grid {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(8, 80px);
+    }
+    .hard-grid {
+        grid-template-columns: repeat(3, 70px);
+        grid-template-rows: repeat(10, 70px);
+    }
 
-    .easy-grid .card {
-        width: 80px;
-        height: 80px;
-    }
+    .easy-grid .card {
+        width: 80px;
+        height: 80px;
+    }
 
-    .hard-grid .card {
-        width: 70px;
-        height: 70px;
-    }
-} */
+    .hard-grid .card {
+        width: 70px;
+        height: 70px;
+    }
+}
