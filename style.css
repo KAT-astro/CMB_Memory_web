@@ -97,18 +97,18 @@ button:hover, #explanation-btn:hover {
     max-width: 900px; */
 /* } */
 #game-board {
-    background-color: #546e7a; /* ← ダークテーマの色を維持 */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    display: inline-grid;   /* ★ grid から inline-grid に変更 */
-    gap: 10px;             /* ★ 15px から 10px に変更 (元のコード) */
-    justify-content: center;
-    align-content: center;
-    margin-bottom: 30px;
-    /* width: 100%; */       /* ★ 削除 */
-    max-width: 1300px;     /* ★ 900px から 1300px に変更 */
-    grid-template-columns: repeat(6, 166px);
+    background-color: #546e7a; /* ← ダークテーマの色を維持 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: inline-grid;    /* ★ grid から inline-grid に変更 */
+    gap: 10px;              /* ★ 15px から 10px に変更 (元のコード) */
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 30px;
+    /* width: 100%; */      /* ★ 削除 */
+    max-width: 1300px;      /* ★ 900px から 1300px に変更 */
+    /* grid-template-columns: repeat(6, 166px); */ /* ★ この行を削除またはコメントアウト */
 }
 
 #game-board p {
