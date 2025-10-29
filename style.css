@@ -456,11 +456,12 @@ h1, h2, h3 {
     box-sizing: border-box;
 }
 
+/* ★ 修正: PC表示で中央揃えにするため width: 100% を削除 */
 .controls {
     display: flex;
     gap: 15px;
-    width: 100%; 
-    box-sizing: border-box;
+    /* width: 100%; <-- 削除 */
+    /* box-sizing: border-box; <-- 削除 */
 }
 
 /* ボタンの共通スタイル */
@@ -539,18 +540,17 @@ button:hover, #explanation-btn:hover {
 .card {
     perspective: 1000px;
     cursor: pointer;
-    /* ★ 修正点 1: PCにもアスペクト比を定義 */
     aspect-ratio: 166 / 116; 
 }
 
 /* PC用のカードサイズ (widthのみ指定) */
 .easy-grid .card {
     width: 166px;
-    height: auto; /* ★ 修正点 1: 高さをautoに */
+    height: auto; 
 }
 .hard-grid .card {
     width: 166px;
-    height: auto; /* ★ 修正点 1: 高さをautoに */
+    height: auto; 
 }
 
 
@@ -640,17 +640,22 @@ button:hover, #explanation-btn:hover {
 #easy-ranking li:nth-child(1):::before, #hard-ranking li:nth-child(1)::before { color: #ffc107; font-size: 1.2em; }
 
 
-/* ルビのスタイル (省略...変更なし) */
-ruby { ruby-align: center; }
-rt { font-size: 0.6em; color: #bdc3c7; user-select: none; }
+/* ルビのスタイル */
+ruby {
+    ruby-align: center;
+    /* ★ 修正: H1のスペース問題を解決 */
+    display: inline-block; 
+}
+
+rt {
+    font-size: 0.6em;
+    /* ★ 修正: フリガナの可読性向上 */
+    color: #ffffff; /* グレー (#bdc3c7) から白に変更 */
+    user-select: none;
+}
 
 
-/* ★★★★★
- *
- * 修正点: レスポンシブ (768px以下)
- *
- * ★★★★★
- */
+/* レスポンシブデザイン (スマホ用・変更なし) */
 @media (max-width: 768px) {
     h1 {
         font-size: 1.8em;
@@ -661,11 +666,13 @@ rt { font-size: 0.6em; color: #bdc3c7; user-select: none; }
         margin-bottom: 20px;
     }
 
-    /* ★ 修正: ボタンレイアウト */
+    /* ボタンレイアウト (スマホ用) */
     .controls {
-        display: grid; /* <-- 変更 */
-        grid-template-columns: 1fr 1fr; /* <-- 2列グリッド */
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
         gap: 10px;
+        width: 100%; /* スマホでは 100% を維持 */
+        box-sizing: border-box;
     }
 
     button, #explanation-btn {
@@ -675,9 +682,8 @@ rt { font-size: 0.6em; color: #bdc3c7; user-select: none; }
         box-sizing: border-box;
     }
     
-    /* ★ 修正: 解説ボタンを2列分広げる */
     #explanation-btn {
-        grid-column: 1 / -1; /* 1列目から最後まで(-1)スパン */
+        grid-column: 1 / -1; 
     }
 
 
@@ -685,24 +691,22 @@ rt { font-size: 0.6em; color: #bdc3c7; user-select: none; }
     .easy-grid {
         grid-template-columns: repeat(4, 70px);
         gap: 10px;
-        /* ★ 修正点 3: grid-template-rows を削除 */
     }
     
     .hard-grid {
         grid-template-columns: repeat(4, 60px);
         gap: 8px;
-        /* ★ 修正点 3: grid-template-rows を削除 */
     }
 
-    /* ★ 修正点 2: カードの比率 */
+    /* カードの比率 (スマホ用) */
     .easy-grid .card {
         width: 70px;
-        height: auto; /* <-- 変更 (70px -> auto) */
+        height: auto; 
     }
     
     .hard-grid .card {
         width: 60px;
-        height: auto; /* <-- 変更 (60px -> auto) */
+        height: auto; 
     }
 
     .ranking-container {
@@ -710,31 +714,24 @@ rt { font-size: 0.6em; color: #bdc3c7; user-select: none; }
     }
 }
 
-/* ★★★★★
- *
- * 修正点: レスポンシブ (480px以下)
- *
- * ★★★★★
- */
+/* レスポンシブデザイン (小型スマホ用・変更なし) */
 @media (max-width: 480px) {
     /* グリッドレイアウト (小型スマホ用) */
     .easy-grid {
         grid-template-columns: repeat(3, 80px);
-        /* ★ 修正点 3: grid-template-rows を削除 */
     }
     .hard-grid {
         grid-template-columns: repeat(3, 70px);
-        /* ★ 修正点 3: grid-template-rows を削除 */
     }
 
-    /* ★ 修正点 2: カードの比率 */
+    /* カードの比率 (小型スマホ用) */
     .easy-grid .card {
         width: 80px;
-        height: auto; /* <-- 変更 (80px -> auto) */
+        height: auto; 
     }
 
     .hard-grid .card {
         width: 70px;
-        height: auto; /* <-- 変更 (70px -> auto) */
+        height: auto; 
     }
 }
