@@ -335,27 +335,85 @@ rt {
     }
 }
 
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .panel, #game-board, #ranking {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* ★ 修正: ボタンレイアウト (Issue 1) */
+    .controls {
+        /* flex-direction: column; <-- 削除 */
+        display: grid; /* <-- 変更 */
+        grid-template-columns: 1fr 1fr; /* <-- 2列グリッド */
+        gap: 10px;
+    }
+
+    button, #explanation-btn {
+        width: 100%; /* グリッドセルに対して100% */
+        padding: 10px;
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+    
+    /* ★ 修正: 解説ボタンを2列分広げる (Issue 1) */
+    #explanation-btn {
+        grid-column: 1 / -1; /* 1列目から最後まで(-1)スパン */
+    }
+
+
+    /* グリッドレイアウト (スマホ用) */
+    .easy-grid {
+        grid-template-columns: repeat(4, 70px);
+        gap: 10px;
+    }
+    
+    .hard-grid {
+        grid-template-columns: repeat(4, 60px);
+        gap: 8px;
+    }
+
+    /* ★ 修正: カードの比率 (Issue 2 & 3) */
+    .easy-grid .card {
+        width: 70px;
+        height: auto; /* <-- 変更 */
+        /* aspect-ratio: 166 / 116;  <-- PCで指定済みのため不要 */
+    }
+    
+    .hard-grid .card {
+        width: 60px;
+        height: auto; /* <-- 変更 */
+        /* aspect-ratio: 166 / 116;  <-- PCで指定済みのため不要 */
+    }
+
+    .ranking-container {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 480px) {
-    /* .easy-grid 自体にグリッド設定 (小型スマホ用) */
+    /* グリッドレイアウト (小型スマホ用) */
     .easy-grid {
         grid-template-columns: repeat(3, 80px);
-        /* grid-template-rows: repeat(8, 80px); ※行数は自動で決まるので不要 */
     }
-
-    /* .hard-grid 自体にグリッド設定 (小型スマホ用) */
     .hard-grid {
         grid-template-columns: repeat(3, 70px);
-        /* grid-template-rows: repeat(10, 70px); ※行数は自動で決まるので不要 */
     }
 
-    /* ★ 小型スマホ用のカードサイズを指定 */
+    /* ★ 修正: カードの比率 (Issue 2 & 3) */
     .easy-grid .card {
         width: 80px;
-        height: 80px;
+        height: auto; /* <-- 変更 */
+        /* aspect-ratio: 166 / 116;  <-- PCで指定済みのため不要 */
     }
 
     .hard-grid .card {
         width: 70px;
-        height: 70px;
+        height: auto; /* <-- 変更 */
+        /* aspect-ratio: 166 / 116;  <-- PCで指定済みのため不要 */
     }
 }
