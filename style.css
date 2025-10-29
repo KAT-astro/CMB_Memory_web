@@ -277,13 +277,6 @@ rt {
     user-select: none;
 }
 
-
-/* ★★★★★
- *
- * 修正点 2: レスポンシブ (スマホ・タブレット) 表示
- *
- * ★★★★★
- */
 @media (max-width: 768px) {
     h1 {
         font-size: 1.8em;
@@ -434,10 +427,12 @@ body {
     text-align: center;
 }
 
+/* ★ 修正点 1: white-space: nowrap; を追加 */
 h1, h2, h3 {
     color: #ff9900; /* 鮮やかなオレンジ */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
+    white-space: nowrap; /* これが H1 のスペース問題を解決します */
 }
 
 /* パネル (コントロールとタイマー) */
@@ -456,12 +451,10 @@ h1, h2, h3 {
     box-sizing: border-box;
 }
 
-/* ★ 修正: PC表示で中央揃えにするため width: 100% を削除 */
+/* PC表示で中央揃え */
 .controls {
     display: flex;
     gap: 15px;
-    /* width: 100%; <-- 削除 */
-    /* box-sizing: border-box; <-- 削除 */
 }
 
 /* ボタンの共通スタイル */
@@ -641,16 +634,15 @@ button:hover, #explanation-btn:hover {
 
 
 /* ルビのスタイル */
+/* ★ 修正点 2: display: inline-block; を削除 */
 ruby {
     ruby-align: center;
-    /* ★ 修正: H1のスペース問題を解決 */
-    display: inline-block; 
+    /* display: inline-block; <-- これがズレの原因でした */
 }
 
 rt {
     font-size: 0.6em;
-    /* ★ 修正: フリガナの可読性向上 */
-    color: #ffffff; /* グレー (#bdc3c7) から白に変更 */
+    color: #ffffff; /* 白に変更 */
     user-select: none;
 }
 
