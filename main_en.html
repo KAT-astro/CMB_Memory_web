@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMB Memory Match</title>
+    <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+    <h1>CMB Memory Match</h1>
+
+    <div class="panel">
+        <div class="controls">
+            <button id="easy-btn">Easy</button>
+            <button id="hard-btn">Hard</button>
+            <a href="CMBmemory_explanation.pdf" target="_blank" id="explanation-btn">Explanation</a>
+        </div>
+        <div id="timer">Time: 00:00</div>
+    </div>
+
+    <div id="game-board">
+        <p>Select a level and start the game!</p>
+    </div>
+
+    <div id="ranking">
+        <h2>🏆 Ranking</h2>
+        <div class="ranking-container">
+            <div>
+                <h3>Easy Mode</h3>
+                <ol id="easy-ranking"></ol>
+            </div>
+            <div>
+                <h3>Hard Mode</h3>
+                <ol id="hard-ranking"></ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
